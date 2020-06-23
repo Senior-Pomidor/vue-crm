@@ -60,10 +60,10 @@ const routes = [
     component: () => import('@/views/History.vue')
   },
 	{
-    path: '/detailrecord',
-    name: 'detailrecord',
+    path: '/detail',
+    name: 'detail',
 		meta: main,
-    component: () => import('@/views/DetailRecord.vue')
+    component: () => import('@/views/Detail.vue')
   }
 ]
 
