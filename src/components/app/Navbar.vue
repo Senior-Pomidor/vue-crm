@@ -8,7 +8,8 @@
 					<i class="material-icons black-text">dehaze</i>
 				</a>
 				<!-- выводим дату с фильтром date -->
-				<span class="black-text">{{date | date}}</span>
+				<!-- в date передаётся доп параметр datetime (параметр format в фильтре) -->
+				<span class="black-text">{{date | date('datetime')}}</span>
 			</div>
 
 			<ul class="right hide-on-small-and-down">
