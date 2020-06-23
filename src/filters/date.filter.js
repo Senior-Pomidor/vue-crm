@@ -1,8 +1,7 @@
 export default function dateFilter(value, format = 'date') {
-	console.log(value)
+	// console.log(value)
 	const options = {}
-
-	// опции заносятся в объект в зависимости от условий format
+	// опции заносятся в объект в зависимости от условия format
 
 	// добавление опций для даты
 	if(format.includes('date')) {
