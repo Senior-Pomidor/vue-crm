@@ -39,7 +39,9 @@
 <script>
 export default {
 	data: () => ({
-		date: new Date
+		date: new Date,
+		interval: null,
+		dropdown: null
 	}),
 	methods: {
 		logout() {
@@ -50,14 +52,25 @@ export default {
 		}
 	},
 	mounted() {
-		setInterval(() => {
+		// не выводим напрямую, а присваеваем в переменную чтобы избавиться от утечки памяти
+		this.interval = setInterval(() => {
 			// обновление времени каждую секунду
 			this.date = new Date
 		}, 1000),
-		M.Dropdown.init(this.$refs.dropdown, {
+		this.dropdown = M.Dropdown.init(this.$refs.dropdown, {
 			// инициализация дропдауна
 			constrainWidth: false
 		})
+	},
+	beforeDestroy() {
+		clearInterval(this.interval)
+		// если плагин не успел инициализироваться,
+		// а мы попытааемся вызвать метод destroy,
+		// может возникнуть ошибка
+		// добавим проверку для избежания ошибок
+		if(this.dropdown && this.dropdown.destroy) {
+			this.dropdown.destroy()
+		}
 	}
 }
 </script>
