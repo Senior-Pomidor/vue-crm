@@ -7,7 +7,7 @@
 				<a href="#" @click.prevent="$emit('click')">
 					<i class="material-icons black-text">dehaze</i>
 				</a>
-				<span class="black-text">12.12.12</span>
+				<span class="black-text">{{date}}</span>
 			</div>
 
 			<ul class="right hide-on-small-and-down">
@@ -38,14 +38,24 @@
 
 <script>
 export default {
+	data: () => ({
+		date: new Date
+	}),
 	methods: {
 		logout() {
+			// выход из приложения
 			console.log('logout')
+			// кверипараметр для дальнейшего отображения сообщения
 			this.$router.push('/login?message=logout')
 		}
 	},
 	mounted() {
+		setInterval(() => {
+			// обновление времени каждую секунду
+			this.date = new Date
+		}, 1000),
 		M.Dropdown.init(this.$refs.dropdown, {
+			// инициализация дропдауна
 			constrainWidth: false
 		})
 	}
