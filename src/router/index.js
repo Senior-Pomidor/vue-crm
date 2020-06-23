@@ -11,7 +11,8 @@ const empty = {layout: 'empty'}
 const routes = [
   {
     path: '/',
-    name: 'Home',
+		name: 'Home',
+		meta: main,
     component: Home
 	},
 	{
@@ -51,12 +52,6 @@ const routes = [
     name: 'planning',
 		meta: main,
     component: () => import('@/views/Planning.vue')
-  },
-	{
-    path: '/home1',
-    name: 'home1',
-		meta: main,
-    component: () => import('@/views/Home1.vue')
   },
 	{
     path: '/history',
