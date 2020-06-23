@@ -1,11 +1,32 @@
 <template>
-  <div id="app">
-    <router-view/>
-  </div>
+	<div id="app">
+		<!-- общий компонент. в зав-ти от условия :is="" вместо него будет стоять дргуой компонент -->
+		<component :is="layout">
+			<router-view />
+		</component>
+	</div>
 </template>
 
+<script>
+	import EmptyLayout from '@/layouts/EmptyLayout.vue'
+	import MainLayout from '@/layouts/MainLayout.vue'
+	export default {
+		computed: {
+			layout() {
+				//возвращает название нужного компонента лэйаута
+				return (this.$route.meta.layout || 'empty') + '-layout'
+			}
+		},
+		components: {
+			EmptyLayout,
+			MainLayout
+		}
+	}
+</script>
+
 <style lang="scss">
-// ~ подключает из папки node_modules
-@import '~materialize-css/dist/css/materialize.min.css';
-@import 'assets/index.css';
+	// ~ подключает из папки node_modules
+	@import '~materialize-css/dist/css/materialize.min.css';
+	@import 'assets/index.css';
+
 </style>
