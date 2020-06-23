@@ -9,12 +9,6 @@ const main = {layout: 'main'}
 const empty = {layout: 'empty'}
 
 const routes = [
-  {
-    path: '/',
-		name: 'Home',
-		meta: main,
-    component: Home
-	},
 	{
     path: '/login',
 		name: 'login',
@@ -29,10 +23,16 @@ const routes = [
 		component: () => import('@/views/Register.vue')
 		//lazyloading. компонент загружается по требованию. облегчает начальную загрузку
   },
+  {
+    path: '/',
+		name: 'Home',
+		meta: {layout: 'main'},
+    component: Home
+	},
 	{
     path: '/categories',
     name: 'categories',
-		meta: {layout: 'main'},
+		meta: main,
     component: () => import('@/views/Categories.vue')
   },
 	{
