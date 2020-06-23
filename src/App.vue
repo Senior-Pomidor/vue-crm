@@ -11,15 +11,15 @@
 	import EmptyLayout from '@/layouts/EmptyLayout.vue'
 	import MainLayout from '@/layouts/MainLayout.vue'
 	export default {
+		components: {
+			EmptyLayout,
+			MainLayout
+		},
 		computed: {
 			layout() {
 				//возвращает название нужного компонента лэйаута
 				return (this.$route.meta.layout || 'empty') + '-layout'
 			}
-		},
-		components: {
-			EmptyLayout,
-			MainLayout
 		}
 	}
 </script>
