@@ -40,6 +40,8 @@
 <script>
 // импорт валидаторов из библиотеки vuelidate
 import {email, required, minLength} from 'vuelidate/lib/validators'
+// импорт объекта со списком кверипараметров
+import messages from '@/utils/messages.js'
 
 export default {
 	name: 'login', //название данной страницы
@@ -54,6 +56,11 @@ export default {
 		// которые должны быть применены к соответствующим моделям
 		email: {email, required},
 		password: {required, minLength: minLength(6)}
+	},
+	mounted() {
+		if(messages[this.$route.query.message]) {
+			this.$message(messages[this.$route.query.message])
+		}
 	},
 	methods: {
 		submitHandler() {
