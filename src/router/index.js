@@ -17,7 +17,7 @@ const routes = [
 		//lazyloading. компонент загружается по требованию. облегчает начальную загрузку
   },
 	{
-    path: '/register',
+		path: '/register',
 		name: 'register',
 		meta: empty,
 		component: () => import('@/views/Register.vue')
