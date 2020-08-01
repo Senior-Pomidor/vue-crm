@@ -41,7 +41,7 @@
 <script>
 export default {
 	data: () => ({
-		date: new Date,
+		date: new Date(),
 		interval: null,
 		dropdown: null
 	}),
