@@ -63,7 +63,7 @@ export default {
 		}
 	},
 	methods: {
-		submitHandler() {
+		async submitHandler() {
 			// console.log(this.$v)
 			// проверка на невалидность формы
 			if (this.$v.$invalid) {
@@ -73,12 +73,17 @@ export default {
 			}
 			// данные для бэкенда
 			const formData = {
-				emal: this.password,
+				email: this.email,
 				password: this.password
 			}
 
-			console.log(formData)
-			this.$router.push('/')
+			try{
+				await this.$store.dispatch('login', formData)
+				// console.log(formData)
+				this.$router.push('/')
+			} catch(err) {
+
+			}
 		}
 	}
 }
