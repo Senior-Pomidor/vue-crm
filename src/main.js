@@ -8,6 +8,12 @@ import messagePlugin from '@/utils/message.plugin.js'
 import './registerServiceWorker'
 import 'materialize-css/dist/js/materialize.min.js'
 
+// импорт объекта firebase
+import firebase from 'firebase/app'
+// импорт модулей авторизации и базы данных
+import 'firebase/auth'
+import 'firebase/database'
+
 Vue.config.productionTip = false
 
 // глобальная регистрация плагинов
@@ -17,8 +23,32 @@ Vue.use(Vuelidate)
 // с присвоением имени date
 Vue.filter('date', dateFilter)
 
-new Vue({
-  router,
-  store,
-  render: h => h(App)
-}).$mount('#app')
+// инициализация firebase
+firebase.initializeApp({
+	apiKey: "AIzaSyA_jXWqM3cAnH3GJZ2Kna3gK_5zZJVkE2Q",
+	authDomain: "vue-crm-3f79d.firebaseapp.com",
+	databaseURL: "https://vue-crm-3f79d.firebaseio.com",
+	projectId: "vue-crm-3f79d",
+	storageBucket: "vue-crm-3f79d.appspot.com",
+	messagingSenderId: "106616315260",
+	appId: "1:106616315260:web:eed333962d438db58798f9",
+	measurementId: "G-7YEQFYGQP6"
+})
+
+let app
+
+// вызывается если есть локальные данные для автоматической авторизации
+firebase.auth().onAuthStateChanged(() => {
+	// коллбэк который выполняется тольо при срабатывании функции
+	// в данном случае инициализируется приложение vue
+	if(!app) {
+		// проверка чтобы не создавалось новое приложение при каждом срабатывании функции
+			app = new Vue({
+			router,
+			store,
+			render: h => h(App)
+		}).$mount('#app')
+	}
+})
+
+
