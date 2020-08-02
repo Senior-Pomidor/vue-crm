@@ -46,9 +46,9 @@ export default {
 		dropdown: null
 	}),
 	methods: {
-		logout() {
+		async logout() {
 			// выход из приложения
-			console.log('logout')
+			await this.$store.dispatch('logout')
 			// кверипараметр для дальнейшего отображения сообщения
 			this.$router.push('/login?message=logout')
 		}
