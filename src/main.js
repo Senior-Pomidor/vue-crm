@@ -5,6 +5,7 @@ import router from './router'
 import store from './store'
 import dateFilter from '@/filters/date.filter.js'
 import messagePlugin from '@/utils/message.plugin.js'
+import Loader from '@/components/app/Loader.vue'
 import './registerServiceWorker'
 import 'materialize-css/dist/js/materialize.min.js'
 
@@ -22,6 +23,8 @@ Vue.use(Vuelidate)
 // глобальная регистрация фильтра dateFilter
 // с присвоением имени date
 Vue.filter('date', dateFilter)
+// глобальная регистрация лоадера
+Vue.component('Loader', Loader)
 
 // инициализация firebase
 firebase.initializeApp({
