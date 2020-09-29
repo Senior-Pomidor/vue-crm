@@ -76,7 +76,14 @@ export default {
 				title: this.title,
 				limit: this.limit
 			})
-			console.log(category)
+			// console.log(category)
+
+			this.title = ''
+			this.limit = 100
+			this.$v.$reset()
+			this.$message(`Категория ${category.title} успешно создана.`)
+
+			this.$emit('created', category)
 			} catch(err) {}
 		}
 	}
