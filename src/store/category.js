@@ -27,6 +27,15 @@ export default {
 				throw err
 			}
 		},
+		async updateCategory({commit, dispatch}, {title, limit, id}) {
+			try {
+				const uid = await dispatch('getUid')
+				await firebase.database().ref(`/users/${uid}/categories`).child(id).update({title, limit})
+			} catch(err) {
+				commit('setError', err)
+				throw err
+			}
+		},
 		async createCategory({commit, dispatch}, {title, limit}) {
 			try {
 				const uid = await dispatch('getUid')
