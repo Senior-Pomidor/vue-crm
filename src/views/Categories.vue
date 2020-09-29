@@ -19,7 +19,7 @@ import CategoryEdit from '@/components/CategoryEdit.vue'
 
 export default {
 	name: 'categories',
-	conmponents: {
+	components: {
 		CategoryCreate,
 		CategoryEdit
 	}
