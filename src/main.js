@@ -4,6 +4,7 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import dateFilter from '@/filters/date.filter.js'
+import currencyFilter from '@/filters/currency.filter.js'
 import messagePlugin from '@/utils/message.plugin.js'
 import Loader from '@/components/app/Loader.vue'
 import './registerServiceWorker'
@@ -23,6 +24,9 @@ Vue.use(Vuelidate)
 // глобальная регистрация фильтра dateFilter
 // с присвоением имени date
 Vue.filter('date', dateFilter)
+// глобальная регистрация фильтра currencyFilter
+// с присвоением имени currency
+Vue.filter('currency', currencyFilter)
 // глобальная регистрация лоадера
 Vue.component('Loader', Loader)
 

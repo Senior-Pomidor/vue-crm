@@ -10,7 +10,7 @@
 					class="currency-line"
 				>
 					<span>
-						{{ getCurrency(cur) }}
+						{{ getCurrency(cur) | currency(cur) }}
 					</span>
 				</p>
 			</div>
