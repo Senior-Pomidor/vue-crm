@@ -66,16 +66,17 @@ export default {
 	methods: {
 		async submitHandler() {
 			// console.log(this.$v.limit)
-			if (this.$v.$invalid()) {
+			if (this.$v.$invalid) {
 				this.$v.$touch()
 				return
 			}
 
 			try {
-				await this.$store.dispatch('createCategory', {
+				const category = await this.$store.dispatch('createCategory', {
 				title: this.title,
 				limit: this.limit
 			})
+			console.log(category)
 			} catch(err) {}
 		}
 	}
