@@ -13,8 +13,14 @@
 
 		<form v-else class="form">
 			<div class="input-field">
-				<select>
-					<option>name cat</option>
+				<select ref="select" v-model="category">
+					<option
+						v-for="cat in categories"
+						:key="cat.id"
+					 	:value="cat.id"
+					>
+						{{ cat.title }}
+					</option>
 				</select>
 				<label>Выберите категорию</label>
 			</div>
@@ -59,13 +65,22 @@ export default {
 	data: () => ({
 		loading: true,
 		select: null,
-		categories: []
+		categories: [],
+		category: null
 	}),
 	async mounted() {
 		this.categories = await this.$store.dispatch('fetchCategories')
+		console.log(this.categories)
 		this.loading = false
-		
-		this.select = M.FormSelect.init(this.$refs.select)
+
+		if(this.categories.length) {
+			this.category = this.categories[0].id
+		}
+
+		// Небольшая задержка чтобы select успел сначала отрендериться
+		setTimeout(() => {
+			this.select = M.FormSelect.init(this.$refs.select)
+		}, 0)
 	},
 	beforeDestroy() {
 		if (this.select && this.select.destroy) {
