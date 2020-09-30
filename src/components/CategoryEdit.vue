@@ -45,7 +45,7 @@
 					>
 					<label for="limit">Лимит</label>
 					<span
-						v-if="$v.title.$dirty && !$v.limit.minValue"
+						v-if="$v.limit.$dirty && !$v.limit.minValue"
 						class="helper-text invalid"
 					>
 						Минимальное значение {{ $v.limit.$params.minValue.min }}
