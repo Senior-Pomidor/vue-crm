@@ -5,7 +5,14 @@
 			<h4>12 212</h4>
 		</div>
 
-		<section>
+		<loader v-if="loading" />
+
+		<!-- <p v-else-if="!categories.length">
+			Категорий пока нет.<br/>
+			<router-link to="/categories">Добавить новую категорию</router-link>
+		</p> -->
+
+		<section v-else>
 			<div>
 				<p>
 					<strong>Девушка:</strong>
@@ -18,3 +25,19 @@
 		</section>
 	</div>
 </template>
+
+<script>
+export default {
+	name: 'planning',
+	data: () => ({
+		loading: true,
+		categories: []
+	}),
+	async mounted() {
+		// const records = await this.$store.dispatch('fetchRecords')
+		const categories = await this.$store.dispatch('fetchCategories')
+
+		this.loading = false
+	}
+}
+</script>

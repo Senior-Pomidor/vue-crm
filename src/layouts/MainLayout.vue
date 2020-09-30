@@ -35,7 +35,7 @@ export default {
 	},
 	data: () => ({
 		isOpen: true,
-		loading: true
+		loading: false
 	}),
 	async mounted() {
 		if (!Object.keys(this.$store.getters.info).length) {
