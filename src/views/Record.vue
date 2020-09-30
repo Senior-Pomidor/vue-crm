@@ -4,7 +4,14 @@
 			<h3>Новая запись</h3>
 		</div>
 
-		<form class="form">
+		<Loader v-if="loading" />
+
+		<p v-else-if="!categories.length" class="center">
+			Категорий пока нет.<br/>
+			<router-link to="/categories">Добавить новую категорию</router-link>
+		</p>
+
+		<form v-else class="form">
 			<div class="input-field">
 				<select>
 					<option>name cat</option>
@@ -45,3 +52,25 @@
 		</form>
 	</div>
 </template>
+
+<script>
+export default {
+	name: 'record',
+	data: () => ({
+		loading: true,
+		select: null,
+		categories: []
+	}),
+	async mounted() {
+		this.categories = await this.$store.dispatch('fetchCategories')
+		this.loading = false
+		
+		this.select = M.FormSelect.init(this.$refs.select)
+	},
+	beforeDestroy() {
+		if (this.select && this.select.destroy) {
+			this.select.destroy()
+		}
+	}
+}
+</script>
