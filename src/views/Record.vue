@@ -81,6 +81,7 @@
 
 <script>
 import {required, minValue} from 'vuelidate/lib/validators'
+import {mapGetters} from 'vuex'
 
 export default {
 	name: 'record',
@@ -97,19 +98,51 @@ export default {
 		amount: {minValue: minValue(1), required},
 		description: {required}
 	},
+	computed: {
+		...mapGetters(['info']),
+		canCreateRecord() {
+			if(this.type === 'income') {
+				return true
+			}
+
+			return this.info.bill >= this.amount
+		}
+	},
 	methods: {
-		submitHandler() {
+		async submitHandler() {
 			if(this.$v.$invalid) {
 				this.$v.$touch()
 				return
 			}
 
+			if(this.canCreateRecord) {
+				try {
+					await this.$store.dispatch('createRecord', {
+					ctegoryId: this.category,
+					amount: this.amount,
+					description: this.description,
+					type: this.type,
+					date: new Date().toJSON()
+				})
+				const bill = this.type === 'income' ? this.info.bill + this.amount : this.info.bill - this.amount
 
+				await this.$store.dispatch('updateInfo', {bill})
+				this.$message('Запись успешно оздана')
+				this.$v.$reset()
+				this.amount = 1
+				this.description = ''
+				} catch (err) {
+
+				}
+				
+			} else {
+				this.$message(`Недостаточно средств на счёте (${this.amount - this.info.bill})`)
+			}
 		}
 	},
 	async mounted() {
 		this.categories = await this.$store.dispatch('fetchCategories')
-		console.log(this.categories)
+		// console.log(this.categories)
 		this.loading = false
 
 		if(this.categories.length) {

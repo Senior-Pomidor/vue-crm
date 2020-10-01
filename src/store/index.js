@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 import auth from './auth.js'
 import info from './info.js'
 import category from './category.js'
+import record from './record.js'
 
 Vue.use(Vuex)
 
@@ -23,7 +24,7 @@ export default new Vuex.Store({
 		async fetchCurrency() {
 			// получаем доступ до env переменой VUE_APP_FIXER
 			// для сокрытия данных лучше использовать такой подход
-			// записывать через env переменные, а не само значение
+			// записывать через env переменныеz, а не само значение
 			const key = process.env.VUE_APP_FIXER
 			const res = await fetch(`http://data.fixer.io/api/latest?access_key=${key}&symbols=USD,EUR,RUB`)
 			return await res.json()
@@ -35,6 +36,7 @@ export default new Vuex.Store({
   modules: {
 		auth,
 		info,
-		category
+		category,
+		record
 	}
 })
